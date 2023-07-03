@@ -1,4 +1,5 @@
-const {UnauthorizedError} = require("./utils/errors")
+const database = require('../database')
+const {UnauthorizedError} = require("../utils/errors")
 
 class User {
     static async login(credentials) {
