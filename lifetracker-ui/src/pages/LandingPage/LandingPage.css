@@ -1,3 +1,10 @@
+.LandingPage {
+  display: flex;
+  width: 60%;
+
+
+}
+
 .tiles {
   display: flex;
   align-items: center;

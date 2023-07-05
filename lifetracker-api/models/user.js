@@ -13,7 +13,6 @@ class User {
         }
     }
 
-
     static async login(credentials) {
         // submit email and password 
         // if any fields are missing throw an error
