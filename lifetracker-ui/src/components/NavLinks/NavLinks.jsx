@@ -5,38 +5,32 @@ export default function NavLinks({ appState, setAppState }) {
   if (!appState.user) {
     return (
       <div className="nav-links">
-        <ul className="links">
-          <li>
+        <div className="links">
+          <div>
             <Link to="/activity">Activity</Link>
-          </li>
-          <li>
+          </div>
+          <div>
             <Link to="/login">Login</Link>
-          </li>
-          <li>
+          </div>
+          <div>
             <Link to="/register">Sign Up</Link>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     );
-  }
-
-  else {
-
+  } else {
     function logoutUser() {
-      setAppState({user:""})
+      setAppState({ user: "" });
     }
     return (
       <div className="nav-links">
-        <ul className="links">
-          <li>
+        <div className="links">
+          <div>
             <Link to="/activity">Activity</Link>
-          </li>
-          <li onClick={logoutUser}>
-            Log Out
-          </li>
-        </ul>
+          </div>
+          <div onClick={logoutUser}>Log Out</div>
+        </div>
       </div>
-    )
+    );
   }
-  
 }

@@ -10,6 +10,7 @@ function LandingPage() {
 
   return (
     <div className="LandingPage">
+      
       <button onClick={() => handleLogin()} >Login</button>
       <button onClick={() => handleRegister()} >Register</button>
     </div>

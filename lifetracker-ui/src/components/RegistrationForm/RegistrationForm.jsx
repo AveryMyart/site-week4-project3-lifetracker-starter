@@ -1,7 +1,7 @@
 import "./RegistrationForm.css";
 import { useState } from "react";
 import axios from "axios";
-import apiClient from "../../../services/apiClient";
+import apiClient from "../../../../services/apiClient";
 import { useNavigate } from "react-router-dom";
 
 export default function RegistrationForm({ setAppState }) {
@@ -18,11 +18,11 @@ export default function RegistrationForm({ setAppState }) {
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e) => {
-    if (e.target.name === "password") {
+  const handleChange = (event) => {
+    if (event.target.name === "password") {
       if (
         regForm.passwordConfirm &&
-        regForm.passwordConfirm !== e.target.value
+        regForm.passwordConfirm !== event.target.value
       ) {
         setErrors((err) => ({
           ...err,
@@ -33,8 +33,8 @@ export default function RegistrationForm({ setAppState }) {
       }
     }
 
-    if (e.target.name === "passwordConfirm") {
-      if (regForm.password && regForm.password !== e.target.value) {
+    if (event.target.name === "passwordConfirm") {
+      if (regForm.password && regForm.password !== event.target.value) {
         setErrors((err) => ({
           ...err,
           passwordConfirm: "Password's do not match",
@@ -44,15 +44,15 @@ export default function RegistrationForm({ setAppState }) {
       }
     }
 
-    if (e.target.name === "email") {
-      if (e.target.value.indexOf("@") === -1) {
+    if (event.target.name === "email") {
+      if (event.target.value.indexOf("@") === -1) {
         setErrors((err) => ({ ...err, email: "Please enter a valid email." }));
       } else {
         setErrors((err) => ({ ...err, email: null }));
       }
     }
 
-    setRegForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+    setRegForm((f) => ({ ...f, [event.target.name]: event.target.value }));
   };
 
   function handleShowPassword() {
@@ -60,14 +60,14 @@ export default function RegistrationForm({ setAppState }) {
   }
 
   async function signupUser() {
-    setErrors((e) => ({ ...e, regForm: null }));
+    setErrors((event) => ({ ...event, regForm: null }));
     setIsLoading(true);
     if (regForm.password !== regForm.passwordConfirm) {
-      setErrors((e) => ({ ...e, passwordConfirm: "Passwords do not match." }));
+      setErrors((event) => ({ ...event, passwordConfirm: "Passwords do not match." }));
       setIsLoading(false);
       return;
     } else {
-      setErrors((e) => ({ ...e, passwordConfirm: null }));
+      setErrors((event) => ({ ...event, passwordConfirm: null }));
     }
 
     const { data, error } = await apiClient.signupUser({
@@ -77,7 +77,7 @@ export default function RegistrationForm({ setAppState }) {
       firstName: regForm.firstName,
       lastName: regForm.lastName
     });
-    if (error) setErrors((e) => ({ ...e, regForm: error }));
+    if (error) setErrors((event) => ({ ...event, regForm: error }));
     if (data?.user) {
       setAppState(data.user);
       apiClient.setToken(data.token);
@@ -85,36 +85,6 @@ export default function RegistrationForm({ setAppState }) {
       navigate("/")
     }
     setIsLoading(false);
-
-    // try {
-    //   const result = await axios.post("http://localhost:3000/auth/register", {
-    //     username: regForm.username,
-    //     firstName: regForm.firstName,
-    //     lastName: regForm.lastName,
-    //     email: regForm.email,
-    //     password: regForm.password,
-    //   });
-
-    //   if (result?.data?.user) {
-    //     setAppState({user: result.data});
-    //     navigate('/')
-    //     setIsLoading(false);
-    //   } else {
-    //     setErrors((err) => ({
-    //       ...err,
-    //       form: "Something went wrong with registration",
-    //     }));
-    //     setIsLoading(false);
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    //   const message = err?.response?.error?.message;
-    //   setErrors((e) => ({
-    //     ...e,
-    //     form: message ? String(message) : String(err),
-    //   }));
-    //   setIsLoading(false);
-    // }
 
     setRegForm({
       username: "",
@@ -128,7 +98,7 @@ export default function RegistrationForm({ setAppState }) {
 
   return (
     <div className="registration-form">
-      <h2>Create An Account</h2>
+      <h2>Sign Up</h2>
       <form className="card">
         <input
           className="form-input"
@@ -136,7 +106,7 @@ export default function RegistrationForm({ setAppState }) {
           name="email"
           value={regForm.email}
           onChange={handleChange}
-          placeholder="✉️  someone@mail.com"
+          placeholder="Example@email.com"
           required
         />
         {errors.email && <span className="errors">{errors.email}</span>}
@@ -175,7 +145,7 @@ export default function RegistrationForm({ setAppState }) {
           name="password"
           value={regForm.password}
           onChange={handleChange}
-          placeholder="🔒  Password"
+          placeholder="Password"
           required
         />
         {errors.password && <span className="errors">{errors.password}</span>}
@@ -186,7 +156,7 @@ export default function RegistrationForm({ setAppState }) {
           name="passwordConfirm"
           value={regForm.passwordConfirm}
           onChange={handleChange}
-          placeholder="🔒  Confirm Password"
+          placeholder="Confirm Password"
           required
         />
         {errors.passwordConfirm && (
