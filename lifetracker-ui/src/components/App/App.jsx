@@ -5,6 +5,7 @@ import Navbar from '../Navbar/Navbar'
 import RegisterPage from '../../pages/RegistrationPage/RegistrationPage'
 import LoginPage from "../../pages/LoginPage/LoginPage"
 import ActivityPage from '../../pages/ActivityPage/ActivityPage'
+import SleepPage from '../../pages/SleepPage/SleepPage'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/register" element={<RegisterPage setAppState={setAppState}/>}/>
         <Route path="/login" element={<LoginPage setAppState={setAppState}/>}/>
         <Route path="/activity" element={<ActivityPage setAppState={setAppState} appState={appState}/>}/>
+        <Route path="/sleep" element={<SleepPage setAppState={setAppState} appState={appState}/>}/>
      </Routes>
     </BrowserRouter>
   </div>

@@ -10,6 +10,9 @@ export default function NavLinks({ appState, setAppState }) {
             <Link to="/activity">Activity</Link>
           </div>
           <div>
+            <Link to="/sleep">Sleep</Link>
+          </div>
+          <div>
             <Link to="/login">Login</Link>
           </div>
           <div>
