@@ -54,7 +54,7 @@ export default function RegistrationForm({ setAppState }) {
 
     setRegForm((f) => ({ ...f, [event.target.name]: event.target.value }));
   };
-
+console.log(regForm)
   function handleShowPassword() {
     setShowPassword(!showPassword);
   }
@@ -74,14 +74,14 @@ export default function RegistrationForm({ setAppState }) {
       email: regForm.email,
       password: regForm.password,
       username: regForm.username,
-      firstName: regForm.firstName,
-      lastName: regForm.lastName
+      first_name: regForm.firstName,
+      last_name: regForm.lastName
     });
     if (error) setErrors((event) => ({ ...event, regForm: error }));
     if (data?.user) {
+      console.log(data)
       setAppState(data.user);
       apiClient.setToken(data.token);
-      console.log(data.token);
       navigate("/")
     }
     setIsLoading(false);
