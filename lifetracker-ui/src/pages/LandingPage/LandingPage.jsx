@@ -17,7 +17,7 @@ function LandingPage() {
             <h2 className="chakra-heading css-1la3ewl">
               Helping you take back control of your world.
             </h2>
-            <a href="/signup">
+            <a href="/register">
               <button type="button" className="chakra-button css-uybm84">
                 Create your account now
               </button>

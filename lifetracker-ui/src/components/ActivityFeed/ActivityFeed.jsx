@@ -12,9 +12,11 @@ export default function ActivityFeed() {
                 <button type="button" className="chakra-button css-moltat">
                   Add Exercise
                 </button>
+                <a className="chakra-link button css-spn4bz" href="/sleep/create">
                 <button type="button" className="chakra-button css-l6faz9">
                   Log Sleep
                 </button>
+                </a>
                 <button type="button" className="chakra-button css-n3canj">
                   Record Nutrition
                 </button>

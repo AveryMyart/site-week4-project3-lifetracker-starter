@@ -4,7 +4,7 @@ import SleepCreateForm from "../../components/SleepCreateForm/SleepCreateForm"
 export default function SleepCreatePage({setAppState, appState}) {
     return (
         <div className="registration-page">
-            <SleepCreateForm />
+            <SleepCreateForm appState={appState} />
         </div>
     )
 }

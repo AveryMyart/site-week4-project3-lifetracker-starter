@@ -3,12 +3,7 @@ const router = express.Router();
 const Sleep = require('../models/sleep')
 
 router.post('/create', async (req, res) => {
-    try {
-        console.log(req.body);
-        return res.body
-    } catch (err) {
-        console.error(err.message);
-    }
+    res.send(req.body)
 });
 
 router.get('/', async (req, res, next) => {

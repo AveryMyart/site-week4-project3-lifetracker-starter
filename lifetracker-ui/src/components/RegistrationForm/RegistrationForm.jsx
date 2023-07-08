@@ -54,7 +54,6 @@ export default function RegistrationForm({ setAppState }) {
 
     setRegForm((f) => ({ ...f, [event.target.name]: event.target.value }));
   };
-console.log(regForm)
   function handleShowPassword() {
     setShowPassword(!showPassword);
   }
@@ -79,7 +78,6 @@ console.log(regForm)
     });
     if (error) setErrors((event) => ({ ...event, regForm: error }));
     if (data?.user) {
-      console.log(data)
       setAppState(data.user);
       apiClient.setToken(data.token);
       navigate("/")

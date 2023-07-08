@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const {PORT} = require("./config")
 const security = require("./middleware/security")
 const authRoutes = require("./routes/auth")
+const sleepRoutes = require("./routes/sleep")
 
 const {BadRequestError, NotFoundError} = require('./utils/errors')
 
@@ -18,6 +19,8 @@ app.use(morgan("tiny"))
 app.use(security.extractUserFromJWT)
 
 app.use("/auth", authRoutes)
+
+app.use('/sleep', sleepRoutes)
 
 app.use((req, res, next) => {
     return next(new NotFoundError())

@@ -76,7 +76,13 @@ class User {
                 last_name
             )
             VALUES ($1, $2, $3, $4, $5)
-            RETURNING email, username, first_name, last_name, created_at;
+            RETURNING 
+                id,
+                email,
+                username, 
+                first_name, 
+                last_name, 
+                created_at;
             `, [lowercasedEmail, credentials.username, hashedPassword, credentials.first_name, credentials.last_name])
         // return user
 
