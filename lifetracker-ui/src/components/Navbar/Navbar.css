@@ -49,3 +49,17 @@
   background-color: #9590A8;
 
 }
+.grow { 
+  transition: all .2s ease-in-out; 
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left: 2%;
+  width: 45%;
+  background-color: #9590A8;
+  margin-bottom:5.5px
+  }
+  
+.grow:hover { 
+  transform: scale(1.1); 
+  }

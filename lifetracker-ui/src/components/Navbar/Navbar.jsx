@@ -9,7 +9,7 @@ export default function Navbar({ appState, setAppState }) {
     <nav className="Navbar">
         <div className="logo">
           <Link to="/">
-            <img src="https://freepngimg.com/download/vector/24144-6-vector-file.png" alt="codepath logo" className="logo"/>
+            <img src="https://freepngimg.com/download/vector/24144-6-vector-file.png" alt="codepath logo" className="grow"/>
           </Link>
         </div>
         <NavLinks appState={appState} setAppState={setAppState}/> 

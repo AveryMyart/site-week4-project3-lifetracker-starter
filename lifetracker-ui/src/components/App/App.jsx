@@ -10,15 +10,25 @@ import SleepCreatePage from '../../pages/SleepCreatePage/SleepCreatePage'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-
 function App() {
   const [appState, setAppState] = useState({
-    user:"",
+    user:{},
     isAuthenticated: false,
     nutrition: "",
     sleep: "",
     exercise:""
   })
+
+
+console.log(appState)
+
+
+
+
+
+  //TODO
+
+  
 
   return (
     <div className="app">
@@ -27,7 +37,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />}/>
         <Route path="/register" element={<RegisterPage setAppState={setAppState}/>}/>
-        <Route path="/login" element={<LoginPage setAppState={setAppState}/>}/>
+        <Route path="/login" element={<LoginPage setAppState={setAppState} appState={appState} />}/>
         <Route path="/activity" element={<ActivityPage setAppState={setAppState} appState={appState}/>}/>
         <Route path="/sleep" element={<SleepPage setAppState={setAppState} appState={appState}/>}/>
         <Route path="/sleep/create" element={<SleepCreatePage setAppState={setAppState} appState={appState}/>}/>

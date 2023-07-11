@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import "./SleepForm.css";
 
-export default function SleepForm() {
+export default function SleepForm({appState, setAppState}) {
+  if (appState.isAuthenticated){
+
   return (
     <div className="sleep-page">
       <div className="header">
@@ -27,4 +29,14 @@ export default function SleepForm() {
       </div>
     </div>
   );
+}
+
+else {
+  return (
+    <>
+    <h2> Login to access this page</h2>
+    </>
+  )
+}
+
 }

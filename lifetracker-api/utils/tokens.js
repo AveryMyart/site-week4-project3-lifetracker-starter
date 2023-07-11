@@ -21,6 +21,16 @@ function validateToken(token) {
     }
 }
 
+function decodeToken(token){
+  try {
+    
+
+    
+  } catch (err) {
+    return null
+  }
+}
+
 
 module.exports = {
     validateToken,

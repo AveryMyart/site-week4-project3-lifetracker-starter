@@ -22,30 +22,28 @@ class Sleep {
 
     const result = await database.query(
       `INSERT INTO sleep (
-                    id,
                     start_time,
                     end_time,
-                    user_id
+                    email
                     ) 
         VALUES ($1, $2, $3, (SELECT id FROM users WHERE email = $4))
         RETURNING id,
                   start_time,
                   end_time,
-                  user_id,
-                  created_at"
+                  email"
                           `,
-      [sleep.start_time, sleep.end_time, sleep.quantity]
+      [sleep.start_time, sleep.end_time]
     );
     const newSleep = result.rows[0];
     return newSleep;
   }
 
-  static async listSleep(user_id) {
+  static async listSleep(email) {
     try {
       const result = await database.query(
         `
-      SELECT * FROM sleep WHERE user_id = $1`,
-        [user_id]
+      SELECT * FROM sleep WHERE email = $1`,
+        [email]
       );
 
       const sleep = result.rows;
@@ -57,6 +55,23 @@ class Sleep {
       return err;
     }
   }
+
+  static async insertSleep(start_time, end_time, email){
+    const sleep = await database.query(
+        `INSERT INTO sleep (
+            start_time,
+            end_time,
+            email
+        )
+        VALUES ($1, $2, $3)
+        RETURNING
+        start_time,
+        end_time
+        `, 
+        [start_time, end_time]
+    );
+    return sleep.rows[0]
+}
 }
 
 module.exports = Sleep;

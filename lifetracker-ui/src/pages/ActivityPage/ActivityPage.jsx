@@ -13,7 +13,7 @@ export default function ActivityPage({setAppState, appState}) {
     else {
         return (
             <div className="activity-page">
-                <ActivityFeed/>
+                <ActivityFeed setAppState={setAppState} appState={appState}/>
             </div>
         )
     }

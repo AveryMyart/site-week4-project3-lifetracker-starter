@@ -1,6 +1,8 @@
 const database = require('../database')
 const {UnauthorizedError, BadRequestError} = require("../utils/errors")
 const bcrypt = require("bcrypt")
+const jwt = require('jsonwebtoken')
+const shitty_secret_key = 'u43qnr39rhr31nrh9f8hr913n'
 
 class User {
     static async makePublicUser(user){
@@ -105,6 +107,18 @@ class User {
 
         return user
     }
+
+    static generateToken(payload) {
+        let token = jwt.sign(payload,shitty_secret_key, { expiresIn: '30d' })
+        return token || null
+    }
+
+    static decodeToken(token) {
+        const verified = jwt.verify(token, shitty_secret_key)
+        console.log(verified)
+        return verified
+    }
+
 }
 
 module.exports = User 

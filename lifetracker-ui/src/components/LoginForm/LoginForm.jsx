@@ -4,7 +4,7 @@ import axios from "axios";
 import apiClient from "../../../../services/apiClient";
 import { useNavigate } from "react-router-dom";
 
-export default function LoginForm({ setAppState }) {
+export default function LoginForm({ appState, setAppState }) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,30 +18,61 @@ export default function LoginForm({ setAppState }) {
     setShowPassword(!showPassword);
   }
 
+
   async function loginUser(event) {
     event.preventDefault();
     setIsLoading(true);
     setErrors((event) => ({ ...event, form: null }));
-
-    const { data, error } = await apiClient.loginUser({
+    
+    const token = await apiClient.loginUser({
       email: loginForm.email,
       password: loginForm.password,
     });
-    if (error) setErrors((event) => ({ ...event, loginForm: error }))
-      console.log(data.user)
-    if (data.user) {
-      setUser(data.user);
-      apiClient.setToken(data.token);
+
+    console.log(token)
+    if (token.data) {
+
+      setAppState(
+        (prevState) => ({ ...prevState, isAuthenticated: true }));
+        // isAuthenticated: true
+      localStorage.setItem("token", token.data)
       navigate("/activity");
-    }
-    setIsLoading(false)
-    console.log('setting app data to', data.user)
-    setAppState(data.user)
+      console.log({appState})
+    setIsLoading(false);
+
     setLoginForm({
       email: "",
       password: "",
     });
   }
+}
+
+  // async function loginUser(event) {
+  //   event.preventDefault();
+  //   setIsLoading(true);
+  //   setErrors((event) => ({ ...event, form: null }));
+
+  //   const token = await apiClient.loginUser({
+  //     email: loginForm.email,
+  //     password: loginForm.password,
+  //   });
+  //   localStorage.setItem("token", token.data)
+   
+    // if (error) setErrors((event) => ({ ...event, loginForm: error }))
+    //   console.log(data.user)
+    // if (data.user) {
+    //   setUser(data.user);
+    //   apiClient.setToken(data.token);
+    //   navigate("/activity");
+    // }
+    // setIsLoading(false)
+    // console.log('setting app data to', data.user)
+    // setAppState(data.user)
+    // setLoginForm({
+    //   email: "",
+    //   password: "",
+    // });
+  // }
 
   function handleOnChange(event) {
     if (event.target.name === "email") {

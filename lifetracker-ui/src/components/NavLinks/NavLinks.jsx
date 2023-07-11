@@ -5,8 +5,11 @@ export default function NavLinks({ appState, setAppState }) {
 
   function logoutUser(){
     localStorage.setItem('token', null)
-    setAppState("")
+    setAppState(
+      (prevState) => ({ ...prevState, isAuthenticated: false }));
+      setAppState("")
   }
+
 
   return (
     <div className="nav-links">
@@ -18,8 +21,8 @@ export default function NavLinks({ appState, setAppState }) {
           <Link to="/sleep">Sleep</Link>
         </div>
         {
-          appState.user ?
-            <div onClick={logoutUser}>Log Out</div>
+          appState ?
+            <div className="logout" onClick={logoutUser}>Log Out</div>
             :
             (
               <>

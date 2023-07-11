@@ -16,15 +16,14 @@ app.use(express.json())
 
 app.use(morgan("tiny"))
 
-app.use(security.extractUserFromJWT)
 
 app.use("/auth", authRoutes)
 
 app.use('/sleep', sleepRoutes)
 
-app.use((req, res, next) => {
-    return next(new NotFoundError())
-})
+app.get('/', (req, res) => res.send('hello'))
+
+
 
 app.use((err, req, res, next) => {
     const status = err.status || 500

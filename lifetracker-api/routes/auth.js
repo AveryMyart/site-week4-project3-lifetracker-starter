@@ -6,7 +6,13 @@ const security = require('../middleware/security')
 router.post("/login", async (req, res, next) => {
     try {
         const user = await User.login(req.body)
-        return res.status(200).json({user})
+        if (user) {
+            let token = User.generateToken(user)
+            console.log(token)
+            res.status(200).json(token)
+            return
+        }
+        res.status(200).json({error: 'login endpoint has invalid user'})
         
     } catch (err) {
         next(err)

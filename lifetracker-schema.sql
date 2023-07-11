@@ -12,6 +12,6 @@ CREATE TABLE users (
     id         SERIAL PRIMARY KEY,
     start_time TIMESTAMP NOT NULL,
     end_time   TIMESTAMP NOT NULL,
-    user_id    VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP NOT NULL
+    email    VARCHAR(255) NOT NULL CHECK (POSITION('@' IN email) > 1),
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
     );

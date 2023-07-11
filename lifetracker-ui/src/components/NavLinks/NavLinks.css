@@ -10,3 +10,15 @@
     margin: 10px;
     border-radius: 7px;
   }
+
+  .logout {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    color: #18020C;
+    background-color: #9590A8;
+    font-weight: bolder;
+    font-size: x-large;
+    text-decoration: underline;
+  }

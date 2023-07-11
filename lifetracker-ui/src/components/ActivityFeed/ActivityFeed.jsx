@@ -1,7 +1,10 @@
 import './ActivityFeed.css'
 
-export default function ActivityFeed() {
+export default function ActivityFeed({appState}) {
+
+  if (appState.isAuthenticated){
     return (
+  
       <div className="activity-feed">
           <div className="chakra-container css-1m340o4">
             <div className="chakra-stack css-12mzq72">
@@ -169,4 +172,12 @@ export default function ActivityFeed() {
           </div>
       </div>
     );
+  }
+  else {
+    return (
+      <>
+      <h2> Login to access this page</h2>
+      </>
+    )
+  }
 }

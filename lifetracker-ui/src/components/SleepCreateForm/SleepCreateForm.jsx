@@ -1,12 +1,43 @@
 import "./SleepCreateForm.css";
 import axios from "axios";
+import {useState} from 'react'
+import { useNavigate } from "react-router-dom";
 
 
 export default function SleepCreateForm({ setAppState, appState }) {
+  const navigate = useNavigate();
+  const [sleepData, setSleepData] = useState({
+    start_time: "",
+    end_time: ""
+  })
+
+  console.log(appState);
+
+  const handleChange =(event)=>{
+    const {name, value} = event.target;
+    setSleepData((prev)=>({...prev, [name]: value}))
+  }
+  /**
+   * TODO:
+   * 1. add sleep form info to post object (not just the token)
+   * 2. insert into the table the relevent information
+   * 3. let the user know it worked or failed
+   */
+
+
   async function onSubmit(event) {
     event.preventDefault();
-    let response = await axios.post('http://localhost:3001/sleep/create', appState)
-    console.log(response.data)
+    let token = localStorage.getItem('token')
+    const params = {
+      start_time: sleepData.start_time,
+      end_time: sleepData.end_time,
+      token: token
+    }
+    if (token) {
+      let response = await axios.post('http://localhost:3001/sleep/create', params)
+      console.log(response.data)
+    }
+
   }
 
   return (
@@ -54,14 +85,16 @@ export default function SleepCreateForm({ setAppState, appState }) {
                                 data-group="true"
                               >
                                 <input
-                                  name="startTime"
+                                  name="start_time"
                                   type="datetime-local"
                                   placeholder="Start Time"
                                   id="field-:re:"
                                   required=""
                                   aria-required="true"
                                   className="chakra-input css-p20xy6"
-                                  defaultValue=""
+                                  
+                                  value={sleepData.start_time}
+                                  onChange={handleChange}
                                 />
                               </div>
                             </div>
@@ -88,14 +121,16 @@ export default function SleepCreateForm({ setAppState, appState }) {
                                 data-group="true"
                               >
                                 <input
-                                  name="endTime"
+                                  name="end_time"
                                   type="datetime-local"
                                   placeholder="End Time"
                                   id="field-:rf:"
                                   required=""
                                   aria-required="true"
                                   className="chakra-input css-p20xy6"
-                                  defaultValue=""
+                                  
+                                  value={sleepData.end_time}
+                                  onChange={handleChange}
                                 />
                               </div>
                             </div>
