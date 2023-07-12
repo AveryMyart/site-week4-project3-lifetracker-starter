@@ -4,15 +4,13 @@ const Sleep = require('../models/sleep')
 const User = require('../models/user')
 
 router.post('/create', async (req, res) => {
-
+    console.log("/create route", req.body)
     try{
         const {start_time, end_time, token} = req.body
-
         const email = User.decodeToken(token).email
-        
+        console.log("email", email)
         const insert = await Sleep.insertSleep(start_time, end_time, email)
         if (insert){
-            
             return res.status(201).json(req.body)
         }
         // res.status(201).json({start_time: start_time, end_time: end_time, email: email})
@@ -29,9 +27,11 @@ router.post('/create', async (req, res) => {
 });
 
 router.get('/', async (req, res, next) => {
+    console.log("Sleep route", req.query)
     try{
-        const { user } = res.locals
-        const sleep = await Sleep.listSleep(req.body, user)
+        const { email } = req.query;
+        console.log(email)
+        const sleep = await Sleep.listSleep(email)
         return res.status(200).json({sleep: sleep})
     } catch (err) {
         next(err )

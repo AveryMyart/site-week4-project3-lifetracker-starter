@@ -5,6 +5,7 @@ import apiClient from "../../../../services/apiClient";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginForm({ appState, setAppState }) {
+  console.log("top of LoginForm", appState)
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,29 +24,32 @@ export default function LoginForm({ appState, setAppState }) {
     event.preventDefault();
     setIsLoading(true);
     setErrors((event) => ({ ...event, form: null }));
-    
+
     const token = await apiClient.loginUser({
       email: loginForm.email,
       password: loginForm.password,
     });
 
-    console.log(token)
+    console.log(token);
     if (token.data) {
+      console.log("LoginForm", appState);
+      setAppState((prevState) => ({
+        ...prevState,
+        user: loginForm.email,
+        isAuthenticated: true,
+      }));
+      localStorage.setItem("token", token.data);
+      console.log(appState);
+      setIsLoading(false);
 
-      setAppState(
-        (prevState) => ({ ...prevState, isAuthenticated: true }));
-        // isAuthenticated: true
-      localStorage.setItem("token", token.data)
+      setLoginForm({
+        email: "",
+        password: "",
+      });
+
       navigate("/activity");
-      console.log({appState})
-    setIsLoading(false);
-
-    setLoginForm({
-      email: "",
-      password: "",
-    });
+    }
   }
-}
 
   // async function loginUser(event) {
   //   event.preventDefault();

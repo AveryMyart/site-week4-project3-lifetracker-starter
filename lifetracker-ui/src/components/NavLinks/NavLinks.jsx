@@ -1,15 +1,25 @@
 import "./Navlinks.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function NavLinks({ appState, setAppState }) {
+
+  const navigate = useNavigate();
 
   function logoutUser(){
     localStorage.setItem('token', null)
     setAppState(
-      (prevState) => ({ ...prevState, isAuthenticated: false }));
-      setAppState("")
-  }
+      (prevState) => ({ ...prevState,
+        exercise: "",
+        isAuthenticated: false,
+        nutrition: "",
+        sleep: null,
+        user: null
+      }));
 
+      navigate("/")
+      // setAppState("")
+  }
 
   return (
     <div className="nav-links">
@@ -21,7 +31,7 @@ export default function NavLinks({ appState, setAppState }) {
           <Link to="/sleep">Sleep</Link>
         </div>
         {
-          appState ?
+          appState.isAuthenticated ?
             <div className="logout" onClick={logoutUser}>Log Out</div>
             :
             (

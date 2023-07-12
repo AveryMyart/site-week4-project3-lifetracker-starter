@@ -11,7 +11,7 @@ export default function SleepCreateForm({ setAppState, appState }) {
     end_time: ""
   })
 
-  console.log(appState);
+  console.log("SleepCreateForm",appState);
 
   const handleChange =(event)=>{
     const {name, value} = event.target;
@@ -33,9 +33,11 @@ export default function SleepCreateForm({ setAppState, appState }) {
       end_time: sleepData.end_time,
       token: token
     }
+    console.log(params)
     if (token) {
       let response = await axios.post('http://localhost:3001/sleep/create', params)
       console.log(response.data)
+      navigate('/sleep')
     }
 
   }

@@ -47,6 +47,7 @@ class Sleep {
       );
 
       const sleep = result.rows;
+      console.log("Sleep model", sleep)
       if (!sleep || sleep.length === 0) {
         throw new NotFoundError("No sleep logged from this user");
       }
@@ -68,7 +69,7 @@ class Sleep {
         start_time,
         end_time
         `, 
-        [start_time, end_time]
+        [start_time, end_time, email]
     );
     return sleep.rows[0]
 }
