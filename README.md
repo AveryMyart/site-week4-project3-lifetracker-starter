@@ -52,7 +52,8 @@ Implement any of the following features to improve the application:
 
 ## Video Walkthrough 
 
-https://github.com/AveryMyart/site-week4-project3-lifetracker-starter/blob/main/Lifetracker.gif
+
+<img src='https://github.com/AveryMyart/site-week4-project3-lifetracker-starter/blob/main/Lifetracker.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ### Building the app
 
